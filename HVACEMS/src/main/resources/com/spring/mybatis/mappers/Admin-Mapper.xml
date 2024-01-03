@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Admin-Mapper">
+
+	<select id="selectAdminById" parameterType="str" resultType="admin">
+		select
+		*
+		from admin
+		where adminId=#{adminId}
+	</select>
+	
+	<select id="selectId" parameterType="admin" resultType="str">
+		select
+		adminId
+		from admin
+		where adminName=#{adminName} and adminEmail=#{adminEmail}
+	</select>
+	
+	<select id="selectPwdById" parameterType="str" resultType="str">
+		select
+		adminPwd
+		from admin
+		where adminId=#{adminId}
+	</select>
+	
+	<select id="selectQuest" parameterType="admin" resultType="admin">
+		select
+		*
+		from admin
+		where adminName=#{adminName} and adminEmail=#{adminEmail} and adminId=#{adminId}
+	</select>
+	
+	<select id="selectPwd" parameterType="admin" resultType="str">
+		select
+		adminPwd
+		from admin
+		where adminName=#{adminName} and adminEmail=#{adminEmail} and adminId=#{adminId} and adminQuest=#{adminQuest} and adminAns=#{adminAns}
+	</select>
+	
+	<update id="insertAdmin" parameterType="admin">
+		insert 
+		into 
+		admin(adminId,adminEmail,adminPwd,adminName,adminQuest,adminAns)
+		values
+		(#{adminId},#{adminEmail},#{adminPwd},#{adminName},#{adminQuest},#{adminAns})
+	</update>
+	
+	<update id="updateState" parameterType="str">
+		update
+		admin
+		set adminstate=0
+		where adminId=#{adminId}
+	</update>
+</mapper>
